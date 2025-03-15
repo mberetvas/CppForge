@@ -267,6 +267,14 @@ A C++ project.
 
 [Add build instructions here]
 
+## Setup Instructions
+
+To set up this project, run the `cpp_project_setup.py` script in the folder where you want the C++ project folder to be created. For example:
+
+```sh
+python path/to/cpp_project_setup.py
+```
+
 ## License
 
 [Add license information here]
