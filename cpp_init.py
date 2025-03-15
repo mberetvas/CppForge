@@ -204,7 +204,7 @@ endif()
         return False
 
 
-def setup_cpp_project(project_path: Path):
+def setup_cpp_project(target_directory: Path):
     """
     Main function to set up a C++ project.
 
@@ -212,7 +212,7 @@ def setup_cpp_project(project_path: Path):
     initializes a Git repository, and creates a .gitignore file.
 
     Args:
-        project_path (Path): The path where the project should be created
+        target_directory (Path): The path where the project should be created
     """
     logging.info("C++ Project Setup Tool")
     logging.info("======================")
@@ -233,7 +233,7 @@ def setup_cpp_project(project_path: Path):
         break
 
     # Create project root directory
-    root_dir = project_path / project_name
+    root_dir = target_directory / project_name
     if not create_directory(root_dir):
         logging.error("Failed to create project directory. Setup aborted.")
         return
