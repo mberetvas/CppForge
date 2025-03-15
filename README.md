@@ -11,6 +11,7 @@ This repository contains a Python script that automates the setup of a new C++ p
 - Adds a basic `README.md` file
 - Sets up initial source files and headers
 - Configures unit testing with CMake
+- Creates `.vscode/settings.json` file with default settings
 
 ## Folder Structure
 
@@ -24,6 +25,8 @@ project_name/
 ├── bin/            # Executable files
 ├── tests/          # Unit tests
 ├── docs/           # Documentation
+├── .vscode/        # VSCode settings
+│   └── settings.json
 ├── .gitignore      # Git ignore file
 ├── README.md       # Project README file
 └── CMakeLists.txt  # Root CMake file
