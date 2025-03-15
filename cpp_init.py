@@ -204,12 +204,15 @@ endif()
         return False
 
 
-def setup_cpp_project():
+def setup_cpp_project(project_path: Path):
     """
     Main function to set up a C++ project.
 
     This function prompts the user for a project name, creates the necessary folder structure,
     initializes a Git repository, and creates a .gitignore file.
+
+    Args:
+        project_path (Path): The path where the project should be created
     """
     logging.info("C++ Project Setup Tool")
     logging.info("======================")
@@ -230,7 +233,7 @@ def setup_cpp_project():
         break
 
     # Create project root directory
-    root_dir = Path(project_name)
+    root_dir = project_path / project_name
     if not create_directory(root_dir):
         logging.error("Failed to create project directory. Setup aborted.")
         return
@@ -269,10 +272,10 @@ A C++ project.
 
 ## Setup Instructions
 
-To set up this project, run the `cpp_project_setup.py` script in the folder where you want the C++ project folder to be created. For example:
+To set up this project, run the `cpp_init.py` script in the folder where you want the C++ project folder to be created. For example:
 
 ```sh
-python path/to/cpp_project_setup.py
+python path/to/cpp_init.py
 ```
 
 ## License
@@ -331,7 +334,11 @@ int main() {
 
 if __name__ == "__main__":
     try:
-        setup_cpp_project()
+        if len(sys.argv) > 1:
+            project_path = Path(sys.argv[1]).resolve()
+        else:
+            project_path = Path.cwd()
+        setup_cpp_project(project_path)
     except KeyboardInterrupt:
         logging.error("\nSetup aborted by user.")
         sys.exit(1)

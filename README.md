@@ -39,7 +39,7 @@ project_name/
 
 2. Run the setup script in the folder where you want the C++ project folder to be created:
     ```sh
-    python3 cpp_project_setup.py
+    python3 cpp_init.py [optional_project_path]
     ```
 
 3. Follow the prompts to enter your project name.
