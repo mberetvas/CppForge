@@ -1,6 +1,6 @@
 # C++ Project Setup Tool
 
-This repository contains a Python script that automates the setup of a new C++ project by creating the necessary folder structure, initializing a Git repository, and adding CMake, CI/CD, and other modern development tools.
+This repository contains a Python script that automates the setup of a new C++ project by creating the necessary folder structure, initializing a Git repository, and adding CMake.
 
 ## Features
 
@@ -10,8 +10,6 @@ This repository contains a Python script that automates the setup of a new C++ p
 - Creates `CMakeLists.txt` files for building the project
 - Adds a basic `README.md` file
 - Sets up initial source files and headers
-- Configures unit testing with CMake
-- Creates `.vscode/settings.json` file with default settings
 
 ## Folder Structure
 
@@ -20,13 +18,9 @@ The generated project will have the following structure:
 ```
 project_name/
 ├── src/            # Source files
+│   └── main.cpp    # Main source file
 ├── include/        # Header files
-├── lib/            # Libraries
-├── bin/            # Executable files
-├── tests/          # Unit tests
-├── docs/           # Documentation
-├── .vscode/        # VSCode settings
-│   └── settings.json
+│   └── project_header.h # Example header file
 ├── .gitignore      # Git ignore file
 ├── README.md       # Project README file
 └── CMakeLists.txt  # Root CMake file

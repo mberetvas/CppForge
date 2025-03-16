@@ -3,8 +3,7 @@
 C++ Project Setup Script
 
 This script automates the setup of a new C++ project by creating the necessary
-folder structure, initializing a Git repository, and adding CMake, CI/CD,
-and other modern development tools.
+folder structure, initializing a Git repository, and adding CMake.
 """
 
 import re
@@ -14,7 +13,7 @@ import logging
 from pathlib import Path
 
 # Constants
-SUBDIRS = ["src", "include", "lib", "bin", "tests", "docs"]
+SUBDIRS = ["src", "include"]
 GITIGNORE_CONTENT = """# Compiled object files
 *.o
 *.obj
@@ -173,30 +172,12 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif()
 
 add_subdirectory(src)
-add_subdirectory(tests)
-add_subdirectory(docs)
 """
     src_cmake_content = """add_executable(${PROJECT_NAME} main.cpp)
-"""
-    tests_cmake_content = """enable_testing()
-add_executable(${PROJECT_NAME}_test test_main.cpp)
-add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}_test)
-"""
-    docs_cmake_content = """find_package(Doxygen)
-if (DOXYGEN_FOUND)
-    configure_file(Doxyfile.in Doxyfile @ONLY)
-    add_custom_target(doc
-        COMMAND ${DOXYGEN_EXECUTABLE} Doxyfile
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        COMMENT "Generating API documentation with Doxygen"
-        VERBATIM)
-endif()
 """
     try:
         create_file(path / "CMakeLists.txt", root_cmake_content)
         create_file(path / "src" / "CMakeLists.txt", src_cmake_content)
-        create_file(path / "tests" / "CMakeLists.txt", tests_cmake_content)
-        create_file(path / "docs" / "CMakeLists.txt", docs_cmake_content)
         logging.info("Created CMakeLists.txt files.")
         return True
     except (OSError, IOError) as e:
@@ -255,16 +236,12 @@ def setup_cpp_project(target_directory: Path):
     # Create README.md file
     readme_content = f"""# {project_name}
 
-A C++ project.
+A minimal C++ project.
 
 ## Directory Structure
 
 - `src/`: Source files
 - `include/`: Header files
-- `lib/`: Libraries
-- `bin/`: Executable files
-- `tests/`: Unit tests
-- `docs/`: Documentation
 
 ## Build Instructions
 
@@ -309,17 +286,6 @@ int main() {
 """
     if not create_file(root_dir / "include" / "project_header.h", header_content):
         logging.warning("Failed to create header file. Continuing with setup...")
-
-    test_content = """#include <iostream>
-
-int main() {
-    std::cout << "Running tests..." << std::endl;
-    // Add your test code here
-    return 0;
-}
-"""
-    if not create_file(root_dir / "tests" / "test_main.cpp", test_content):
-        logging.warning("Failed to create test file. Continuing with setup...")
 
     logging.info("\nProject setup complete!")
     logging.info("Project '%s' has been created with the following structure:", project_name)
